@@ -1,6 +1,8 @@
 package ru.attest.reactive_mongo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,17 @@ public class CityService {
 		collection.setFilters(filterList);
 
 		query.addCriteria(TemplateCriteriaCommon.getCriteria(collection));
+		Pageable pageable = PageRequest.of(0,20);
+		query.with(pageable);
 		return template.find(query,City.class);
 	}
 
 	public Flux<City> findByAll(){
-		return template.findAll(City.class);
+		Query query = new Query();
+		Pageable pageable = PageRequest.of(0,50000);
+		query.with(pageable);
+		return template.find(query,City.class);
+			//	.findAll(City.class);
 	}
 
 }

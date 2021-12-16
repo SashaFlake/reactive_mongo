@@ -13,12 +13,14 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 public class ReactiveMongoConfig  extends AbstractReactiveMongoConfiguration {
 	@Override
 	protected String getDatabaseName() {
-		return "stat";
+		return "stat_db";
 	}
 
 	@Override
 	public MongoClient reactiveMongoClient() {
-		ConnectionString connectionString = new ConnectionString("mongodb://fap9.krit.pro:27017/stat");
+
+		//ConnectionString connectionString = new ConnectionString("mongodb://fap9.krit.pro:27017/stat");
+		ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/stat_db");
 		MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
 				.applyConnectionString(connectionString)
 				.build();
@@ -28,6 +30,6 @@ public class ReactiveMongoConfig  extends AbstractReactiveMongoConfiguration {
 
 	@Bean
 	public ReactiveMongoTemplate reactiveMongoTemplate(){
-		return new ReactiveMongoTemplate(reactiveMongoClient(),"stat");
+		return new ReactiveMongoTemplate(reactiveMongoClient(),"stat_db");
 	}
 }
