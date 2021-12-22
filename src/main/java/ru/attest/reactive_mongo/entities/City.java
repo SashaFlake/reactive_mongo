@@ -15,4 +15,5 @@ public class City {
 	private String country;
 	private String lat;
 	private String lng;
+
 }

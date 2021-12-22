@@ -11,6 +11,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.attest.reactive_mongo.entities.Group;
 import ru.attest.reactive_mongo.entities.User;
+import ru.attest.reactive_mongo.entities.mars.enterprise.MarsEnterprise;
+import ru.attest.reactive_mongo.services.MarsEnterpriseService;
 import ru.attest.reactive_mongo.services.UserTemplate;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class UserController {
 	@Autowired
 	UserTemplate template;
 
+	@Autowired
+	MarsEnterpriseService marsEnterpriseService;
 	@PostMapping(value = "User/Save",
 			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
 					MediaType.ALL_VALUE},
@@ -42,4 +46,18 @@ public class UserController {
 		return template.findAll();
 	}
 
+	@GetMapping(value = "gen",
+			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
+					MediaType.ALL_VALUE},
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+	)
+	public Flux<MarsEnterprise>generateEnt() {
+		List<MarsEnterprise> list = new ArrayList<>();
+		for (int i = 0; i < 5000; i++) {
+			MarsEnterprise marsEnterprise = marsEnterpriseService.randomMarsEnterprise();
+			list.add(marsEnterprise);
+			marsEnterpriseService.getTemplate().save(marsEnterprise);
+		}
+		return Flux.fromIterable(list);
+	}
 }

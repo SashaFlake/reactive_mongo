@@ -50,6 +50,7 @@ public class CityRouter {
 				// .GET("/person", accept(APPLICATION_JSON), handler::listPeople)
 				.POST("/City/Create", handler::createCity)
 				.POST("/City/View", handler::view)
+				.POST("MarsEnt",handler::createMarsEnt)
 				.build();
 		return route;
 								//.findAll(), User.class));

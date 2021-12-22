@@ -12,4 +12,13 @@ public class Conf {
 
     public String confTypeDescription;
 
+    public Conf(String name, String confTypeName, String confTypeShortName, String confTypeDescription) {
+        this.name = name;
+        this.confTypeName = confTypeName;
+        this.confTypeShortName = confTypeShortName;
+        this.confTypeDescription = confTypeDescription;
+    }
+
+    public Conf() {
+    }
 }
