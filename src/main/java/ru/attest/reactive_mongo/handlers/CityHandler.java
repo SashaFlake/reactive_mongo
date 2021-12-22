@@ -2,6 +2,7 @@ package ru.attest.reactive_mongo.handlers;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import ru.attest.reactive_mongo.entities.City;
 import ru.attest.reactive_mongo.entities.MetaModel;
 import ru.attest.reactive_mongo.entities.Metaclass;
 import ru.attest.reactive_mongo.entities.enterprise.*;
+import ru.attest.reactive_mongo.entities.mars.enterprise.MarsEnterprise;
 import ru.attest.reactive_mongo.services.MarsEnterpriseService;
 import ru.attest.reactive_mongo.services.TemplateCriteriaCommon;
 import ru.attest.reactive_mongo.util.CustomFilter;
@@ -130,6 +132,12 @@ public class CityHandler {
         MarsEnterpriseService marsEnterpriseService = new MarsEnterpriseService(template);
         //marsEnterpriseService.create();
         return marsEnterpriseService.create();
+    }
+    public Mono<ServerResponse> viewAllMars(ServerRequest request){
+        Query query = new Query();
+        query.with(Pageable.ofSize(20).withPage(1));
+        Flux<MarsEnterprise> found = template.find(query,MarsEnterprise.class);
+        return ServerResponse.ok().body(found,MarsEnterprise.class);
     }
 
     public Mono<ServerResponse> view(ServerRequest request) {

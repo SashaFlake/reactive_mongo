@@ -51,6 +51,7 @@ public class CityRouter {
 				.POST("/City/Create", handler::createCity)
 				.POST("/City/View", handler::view)
 				.POST("MarsEnt",handler::createMarsEnt)
+				.POST("viewAllMars", handler::viewAllMars)
 				.build();
 		return route;
 								//.findAll(), User.class));
