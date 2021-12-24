@@ -80,4 +80,5 @@ public class Enterprise {
 
     private List<Department> departments;
 
+    private boolean liquidationFlag;
 }

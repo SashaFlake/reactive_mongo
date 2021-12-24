@@ -3,19 +3,14 @@ package ru.attest.reactive_mongo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicate;
 import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import ru.attest.reactive_mongo.entities.User;
-import ru.attest.reactive_mongo.handlers.UserHandler;
 import ru.attest.reactive_mongo.services.UserTemplate;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Configuration(proxyBeanMethods = false)
 public class UserRouter {
@@ -37,7 +32,7 @@ public class UserRouter {
 */
 	@Bean
 	RouterFunction<ServerResponse> getAllUsersRoute() {
-		System.out.println("a");
+		//System.out.println("a");
 		return route(GET("/users"),
 				req -> ok().body(
 						template.findAll(), User.class));

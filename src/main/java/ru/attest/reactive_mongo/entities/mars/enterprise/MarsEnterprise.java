@@ -1,9 +1,8 @@
 package ru.attest.reactive_mongo.entities.mars.enterprise;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.attest.reactive_mongo.entities.AbstractEntity;
 import ru.attest.reactive_mongo.entities.enterprise.Conf;
 
 import java.util.ArrayList;
@@ -12,10 +11,7 @@ import java.util.Map;
 
 @Data
 @Document
-public class MarsEnterprise {
-    @Id
-    private ObjectId id;
-    private String name;
+public class MarsEnterprise extends AbstractEntity {
     private String shortName;
     private String engName;
     private Conf confidential;
