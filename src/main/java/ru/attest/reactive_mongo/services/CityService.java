@@ -27,7 +27,7 @@ public class CityService {
 		collection.setCondition(0);
 		CustomFilter filter = new CustomFilter();
 		filter.setField("name");
-		filter.setTypeComprason(TypeComparison.Equal);
+		filter.setTypeComparison(TypeComparison.Equal);
 		filter.setValues("Pas de la Casa");
 		List<CustomFilter> filterList = new ArrayList<>();
 		filterList.add(filter);

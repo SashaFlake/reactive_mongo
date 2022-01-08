@@ -1,7 +1,5 @@
 package ru.attest.reactive_mongo.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.attest.reactive_mongo.entities.Group;
 import ru.attest.reactive_mongo.entities.User;
-import ru.attest.reactive_mongo.entities.mars.enterprise.MarsEnterprise;
+import ru.attest.reactive_mongo.entities.MarsEnterprise;
 import ru.attest.reactive_mongo.services.MarsEnterpriseService;
 import ru.attest.reactive_mongo.services.UserTemplate;
+import ru.attest.reactive_mongo.util.MarsEnterpriseFakeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +51,8 @@ public class UserController {
 	)
 	public Flux<MarsEnterprise>generateEnt() {
 		List<MarsEnterprise> list = new ArrayList<>();
-		for (int i = 0; i < 5000; i++) {
-			MarsEnterprise marsEnterprise = marsEnterpriseService.randomMarsEnterprise();
+		for (int i = 0; i < 1000; i++) {
+			MarsEnterprise marsEnterprise = MarsEnterpriseFakeGenerator.randomMarsEnterprise();
 			list.add(marsEnterprise);
 			marsEnterpriseService.getTemplate().save(marsEnterprise);
 		}

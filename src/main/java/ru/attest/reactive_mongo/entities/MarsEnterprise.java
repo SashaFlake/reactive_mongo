@@ -1,10 +1,12 @@
-package ru.attest.reactive_mongo.entities.mars.enterprise;
+package ru.attest.reactive_mongo.entities;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import ru.attest.reactive_mongo.entities.AbstractEntity;
 import ru.attest.reactive_mongo.entities.enterprise.Conf;
+import ru.attest.reactive_mongo.entities.mars.enterprise.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,4 +30,6 @@ public class MarsEnterprise extends AbstractEntity {
     private Structure structure;
     private List<ContactScc> contactSccList;
     private SpecialService specialService;
+    private String state;
+    private LocalDateTime changeDate;
 }

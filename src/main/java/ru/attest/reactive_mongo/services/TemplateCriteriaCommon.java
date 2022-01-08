@@ -12,16 +12,19 @@ public class TemplateCriteriaCommon {
 
 	public static Criteria getCriteria(FilterCollection filterCollection){
 		List<Criteria> criteriaList = new ArrayList<>();
-		Criteria finalCr = new Criteria().all();
-
-		for(CustomFilter filter_:filterCollection.getFilters()){
+		Criteria finalCr = new Criteria();//.all();
+		List<Criteria> criteriaList1 = new ArrayList<>();
+		filterCollection.getFilters().forEach(filter_ -> {
 			String field = filter_.getField();
 			Object value = filter_.getValues();
-			TypeComparison comparison = filter_.getTypeComprason();
-			if(filterCollection.getCondition().equals(0)){
-				//finalCr.andOperator(getComparison(comparison,field,value));
-				finalCr = getComparison(comparison,field,value);
-			}
+			TypeComparison comparison = filter_.getTypeComparison();
+			criteriaList1.add(getComparison(comparison, field, value));
+		});
+		if(filterCollection.getCondition().equals(0)) {
+			finalCr.andOperator(criteriaList1.toArray(new Criteria[criteriaList1.size()]));
+		}else {
+			finalCr.orOperator(criteriaList1.toArray(new Criteria[criteriaList1.size()]));
+
 		}
 		return finalCr;
 		/*for(String field:fields){

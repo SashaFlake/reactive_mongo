@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import reactor.core.publisher.Flux;
-import ru.attest.reactive_mongo.entities.mars.enterprise.MarsEnterprise;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

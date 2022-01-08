@@ -27,6 +27,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	// https://mvnrepository.com/artifact/net.ozwolf/mongo-trek
+    implementation group: 'net.ozwolf', name: 'mongo-trek', version: '5.0.0'
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+    //implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.4.1'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
 }
 
 test {

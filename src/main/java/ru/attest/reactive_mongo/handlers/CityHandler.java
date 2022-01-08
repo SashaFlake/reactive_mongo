@@ -1,26 +1,19 @@
 package ru.attest.reactive_mongo.handlers;
 
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyExtractors;
-import org.springframework.web.reactive.function.BodyInserter;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.attest.reactive_mongo.entities.City;
 import ru.attest.reactive_mongo.entities.MetaModel;
-import ru.attest.reactive_mongo.entities.Metaclass;
 import ru.attest.reactive_mongo.entities.enterprise.*;
-import ru.attest.reactive_mongo.entities.mars.enterprise.MarsEnterprise;
+import ru.attest.reactive_mongo.entities.MarsEnterprise;
 import ru.attest.reactive_mongo.services.MarsEnterpriseService;
 import ru.attest.reactive_mongo.services.TemplateCriteriaCommon;
 import ru.attest.reactive_mongo.util.CustomFilter;
@@ -31,13 +24,9 @@ import ru.attest.reactive_mongo.entities.enterprise.Enterprise;
 
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -128,14 +117,26 @@ public class CityHandler {
                         .body(template.save(ent), Enterprise.class));
 
     }
+
     public Mono<ServerResponse> createMarsEnt(ServerRequest request) {
         MarsEnterpriseService marsEnterpriseService = new MarsEnterpriseService(template);
         //marsEnterpriseService.create();
         return marsEnterpriseService.create();
     }
+
     public Mono<ServerResponse> viewAllMars(ServerRequest request){
+      /*  request.bodyToMono(CustomFilter.class).flatMap(
+                x->{
+                    x.getField();
+                    x.getTypeComprason();
+                    x.getValues();
+                    return
+                }
+        );
+
+       */
         Query query = new Query();
-        query.with(Pageable.ofSize(20).withPage(1));
+        query.with(Pageable.ofSize(1000).withPage(0));
         Flux<MarsEnterprise> found = template.find(query,MarsEnterprise.class);
         return ServerResponse.ok().body(found,MarsEnterprise.class);
     }
@@ -156,7 +157,7 @@ public class CityHandler {
             collection.setCondition(0);
             CustomFilter filter = new CustomFilter();
             filter.setField("name");
-            filter.setTypeComprason(TypeComparison.Equal);
+            filter.setTypeComparison(TypeComparison.Equal);
             Mono<City> city_ = request.body(BodyExtractors.toMono(City.class));
              //City aA = null;
             //city_.doOnSuccess(x->x.getName());
