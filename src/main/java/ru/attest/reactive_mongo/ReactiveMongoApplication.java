@@ -18,7 +18,7 @@ import ru.attest.reactive_mongo.rabbit.Receiver;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 
 public class ReactiveMongoApplication {
-
+/*
 	public static final String topicExchangeName = "spring-boot-exchange";
 
 	static final String queueName = "spring-boot";
@@ -51,7 +51,7 @@ public class ReactiveMongoApplication {
 	@Bean
 	MessageListenerAdapter listenerAdapter(Receiver receiver) {
 		return new MessageListenerAdapter(receiver, "receiveMessage");
-	}
+	}*/
 	public static void main(String[] args) {
 		SpringApplication.run(ReactiveMongoApplication.class, args);
 	}

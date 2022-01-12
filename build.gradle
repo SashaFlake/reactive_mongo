@@ -32,6 +32,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
     //implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.4.1'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-acl
+    implementation group: 'org.springframework.security', name: 'spring-security-acl', version: '5.6.1'
+    // https://mvnrepository.com/artifact/faker/faker
+    // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
 
 }
 
