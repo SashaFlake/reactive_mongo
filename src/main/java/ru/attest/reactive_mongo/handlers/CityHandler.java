@@ -48,73 +48,10 @@ public class CityHandler {
 
     public Mono<ServerResponse> createCity(ServerRequest request) {
         Mono<City> city = request.bodyToMono(City.class);
-
-       // ru.attest.reactive_mongo.entities.enterprise.Enterprise ent = new Enterprise();
-        Enterprise ent = new Enterprise();
-        ent.setId(ObjectId.get());
-        ent.setName("test");
-        ent.setParentKey(null);
-        ent.setOrd(0);
-        ent.setShortName("tst");
-        Conf conf = new Conf();
-        conf.setName("открытый доступ");
-        conf.setConfTypeDescription("описание");
-        ent.setConfClassified(conf);
-        ent.setFullName("test test");
-        Timezone timezone = new Timezone();
-        timezone.setTimeId("i");
-        timezone.setName("+3");
-        timezone.setTimeValue(1.00);
-        Territory territory = new Territory();
-        territory.setTerrid("Spb");
-        territory.setName("Saint-Petersburg");
-        territory.setOktmo("000");
-        ent.setTimezone(timezone);
-        ent.setCity(territory);
-        ent.setTerName("spb");
-        ent.setLatitude(0.00);
-        ent.setLongitude(0.00);
-        ent.setZoom(0.00);
-        ent.setOpf("aaa");
-        ent.setInn("aa");
-        ent.setEntRequisite("aaa");
-        ent.setInfConnCategory("aa");
-        ent.setEconomyDep("aaa");
-        ent.setDepComplex("aaa");
-        ent.setIsExploitationEnt(false);
-        ent.setIsYarooEnt(true);
-        ent.setRegisterNum("aa");
-        ent.setRegisterDate(LocalDateTime.now());
-        ent.setRegisterAddress("ss");
-        ent.setRadiationDanger("ss");
-        ent.setNuclearDanger("aa");
-        ent.setChemicalDanger("aa");
-        ent.setChemicalDangerInfluenceCategory("aa");
-        ent.setKeyId(BigDecimal.ONE);
-        ent.setEnterpriseStruct("rrr");
-        DepartmentType departmentType = new DepartmentType();
-        departmentType.setGroupDepartmentType("aa");
-        departmentType.setGroupDepartmentType("Aaa");
-        ent.setDepartmentType(departmentType);
-        Okved okved = new Okved();
-        okved.setId("a");
-        okved.setId("aa");
-        ent.setOkvedSet(new ArrayList<>());
-        ent.getOkvedSet().add(okved);
-        ent.setDepartments(new ArrayList<>());
-        Department department = new Department();
-        department.setDepartmentType(departmentType);
-        department.setContacts("a");
-        department.setName("a");
-        department.setShortName("aa");
-        department.setOrd(1);
-        department.setFullName("aaaaaaa");
-        ent.getDepartments().add(department);
-        //template.save(ent);
-        return city.flatMap(user ->
+        return city.flatMap(response ->
                 ServerResponse.status(HttpStatus.CREATED)
                         .contentType(APPLICATION_JSON)
-                        .body(template.save(ent), Enterprise.class));
+                        .body(template.save(city), Enterprise.class));
 
     }
 
@@ -125,16 +62,7 @@ public class CityHandler {
     }
 
     public Mono<ServerResponse> viewAllMars(ServerRequest request){
-      /*  request.bodyToMono(CustomFilter.class).flatMap(
-                x->{
-                    x.getField();
-                    x.getTypeComprason();
-                    x.getValues();
-                    return
-                }
-        );
-
-       */
+        //Если я создаю query я блокирую ввод
         Query query = new Query();
         query.with(Pageable.ofSize(1000).withPage(0));
         Flux<MarsEnterprise> found = template.find(query,MarsEnterprise.class);
@@ -144,14 +72,8 @@ public class CityHandler {
     public Mono<ServerResponse> view(ServerRequest request) {
 
             Mono<City> city = request.bodyToMono(City.class);
-            //Criteria criteria = new Criteria().;
             Mono<City> bodyData;
 
-         //   bodyData =
-            //  request.bodyToMono(City.class);
-
-          //  City fromBody;
-            //        request.bodyToMono(City.class).map(new City());
             FilterCollection collection = new FilterCollection();
             collection.setCaseSensitive(false);
             collection.setCondition(0);
@@ -159,16 +81,6 @@ public class CityHandler {
             filter.setField("name");
             filter.setTypeComparison(TypeComparison.Equal);
             Mono<City> city_ = request.body(BodyExtractors.toMono(City.class));
-             //City aA = null;
-            //city_.doOnSuccess(x->x.getName());
-           // String name = city.publish().
-                    //.map(City::getName).doOnSuccess(a->System.out.println(a));
-                 //   .block()
-                 //   .toFuture().get()
-                  //  .subscribe(String::valueOf);
-            //filter.setValues(city_.block());
-          //  bl().subscribe(x->filter.setField(x));
-                    //bodyData.map(City::getCountry).subscribe());
             List<CustomFilter> filterList = new ArrayList<>();
             filterList.add(filter);
             collection.setFilters(filterList);

@@ -43,7 +43,7 @@ public class UserController {
 	public Flux<User> findAll(){
 		return template.findAll();
 	}
-
+/*
 	@GetMapping(value = "gen",
 			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
 					MediaType.ALL_VALUE},
@@ -58,4 +58,7 @@ public class UserController {
 		}
 		return Flux.fromIterable(list);
 	}
+
+ */
+
 }
