@@ -15,6 +15,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(
             //цепочка фильтрации
+            //каждый запрос должен быть авторизован
             ServerHttpSecurity http) {
         return http.authorizeExchange()
                 .anyExchange().authenticated()

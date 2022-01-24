@@ -22,8 +22,8 @@ public class AbstractEntity implements MetaclassInfo{
 
 	public Flux<Metaclass> setMetaclass(){
 		Metaclass metaclass = new Metaclass();
-		metaclass.setName(MarsEnterprise.class.toString());
-		List<Field> fields = Arrays.stream(MarsEnterprise.class.getFields()).toList();
+		metaclass.setName(this.getClass().getName());
+		List<Field> fields = Arrays.stream(this.getClass().getFields()).toList();
 
 		fields.forEach(
 				field -> {

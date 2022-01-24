@@ -1,4 +1,4 @@
-package ru.attest.reactive_mongo.controller;
+package ru.attest.reactive_mongo.routers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class CityRouter {
 	ReactiveMongoTemplate template;
 	@Bean
 	RouterFunction<ServerResponse> getCityRoute() {
-	/*	RouterFunction<ServerResponse> route = route()
+		/*	RouterFunction<ServerResponse> route = route()
 				.GET("/cities", accept(APPLICATION_JSON), handler::getPerson)
 				.GET("/person", accept(APPLICATION_JSON), handler::listPeople)
 				.POST("/person", handler::createPerson)
@@ -45,7 +45,7 @@ public class CityRouter {
 
 		 */
 		CityHandler handler = new CityHandler(template);
-		RouterFunction<ServerResponse> route = route()
+		return route()
 				// .GET("/person/{id}", accept(APPLICATION_JSON), handler::getPerson)
 				// .GET("/person", accept(APPLICATION_JSON), handler::listPeople)
 				.POST("/City/Create", handler::createCity)
@@ -53,7 +53,6 @@ public class CityRouter {
 				.POST("MarsEnt",handler::createMarsEnt)
 				.POST("viewAllMars", handler::viewAllMars)
 				.build();
-		return route;
 								//.findAll(), User.class));
 
 	}

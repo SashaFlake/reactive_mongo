@@ -11,7 +11,7 @@ import ru.attest.reactive_mongo.services.UserTemplate;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
-
+@Deprecated
 @Configuration(proxyBeanMethods = false)
 public class UserRouter {
 	@Autowired

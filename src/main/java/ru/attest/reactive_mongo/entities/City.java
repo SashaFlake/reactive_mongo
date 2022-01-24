@@ -7,10 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(value = "cities")
 @Data
-public class City {
+public class City extends AbstractEntity{
 
-	@Id
-	private ObjectId id;
+
 	private String name;
 	private String country;
 	private String lat;

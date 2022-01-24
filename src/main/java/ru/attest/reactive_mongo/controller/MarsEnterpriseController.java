@@ -24,8 +24,6 @@ public class MarsEnterpriseController<T extends AbstractEntity> {
 
     @Autowired
     CommonService service;
-    @Autowired
-    RabbitTemplate rabbitTemplate;
     @PostMapping(value = "{entityClass}/find",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE,
                     MediaType.ALL_VALUE},
@@ -42,9 +40,5 @@ public class MarsEnterpriseController<T extends AbstractEntity> {
             return Flux.just(ResponseEntity.badRequest().body("No entity found: "+ entityClass));
         }
         return service.findByPredicates(input,clazz);
-    }
-    @GetMapping(value = "sendMessage")
-    public void sendMessage(){
-        rabbitTemplate.convertAndSend("Hello");
     }
 }

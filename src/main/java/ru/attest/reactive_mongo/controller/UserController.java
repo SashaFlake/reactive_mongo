@@ -30,7 +30,7 @@ public class UserController {
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	)
 	public Mono<ResponseEntity<User>> save(@RequestBody User user){
-		return template.save(user)
+		return template.save(Mono.just(user))
 				.map(user1 -> new ResponseEntity<>(user1, HttpStatus.ACCEPTED))
 				.defaultIfEmpty(new ResponseEntity<>(user, HttpStatus.NOT_FOUND));
 	}

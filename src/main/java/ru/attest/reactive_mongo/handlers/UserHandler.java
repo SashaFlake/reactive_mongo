@@ -11,6 +11,8 @@ import reactor.core.publisher.Mono;
 import ru.attest.reactive_mongo.entities.User;
 import ru.attest.reactive_mongo.services.UserTemplate;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
+
 @Component
 public class UserHandler {
 	@Autowired
@@ -22,5 +24,11 @@ public class UserHandler {
 	public Mono<ServerResponse> all(ServerRequest request) {
 		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
 				.body(template.findAll(),User.class);
+	}
+
+	public Mono<ServerResponse> createUser(ServerRequest request){
+		Mono<User> userMono = request.bodyToMono(User.class);
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+				.body(BodyInserters.fromValue("User created: "+template.save(userMono).map(User::getUsername)));
 	}
 }

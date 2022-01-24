@@ -22,11 +22,11 @@ public class UserTemplate {
 	public Flux<User> findAll() {
 		return template.findAll(User.class);
 	}
-	public Mono<User> save(User user) {
+	public Mono<User> save(Mono<User> user) {
 		return template.save(user);
 	}
 
-	public Flux<MarsEnterprise> findAllMars(){
+	public Flux<MarsEnterprise> findPageble(){
 		Query query = new Query();
 		// query.addCriteria(Criteria.where(input.getFilters().get(0).getField())
 		//         .is(input.getFilters().get(0).getValues()));
